@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header th:fragment="top" class="desk-top">
+      <a class="skip" href="#main">Skip to content</a>
+      <div class="wrap">
+        <a th:replace="~{fragments/site :: brand}"></a>
+        <div>
+          <a href="/">View website ↗</a>
+          <form method="post" th:action="@{/admin/logout}">
+            <button class="button secondary small">Sign out</button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <nav th:fragment="deskNavigation" class="desk-nav" aria-label="Editorial desk">
+      <div class="wrap">
+        <a href="/admin" th:classappend="${page == 'Overview' ? 'active' : ''}">Overview</a>
+        <a
+          href="/admin/posts"
+          th:classappend="${page == 'Manage posts' or page == 'New post' or page == 'Edit post' ? 'active' : ''}">
+          Posts
+        </a>
+        <a
+          href="/admin/messages"
+          th:classappend="${page == 'Messages' or page == 'Private message' ? 'active' : ''}">
+          Messages
+        </a>
+        <a href="/admin/categories">Categories</a>
+        <a href="/admin/media">Media</a>
+        <a href="/admin/settings">Settings</a>
+      </div>
+    </nav>
+    <nav th:fragment="pager(path)" th:if="${results.totalPages > 1}" class="pager" aria-label="Pages">
+      <a
+        th:if="${results.hasPrevious()}"
+        th:href="@{${path}(page=${results.number - 1},state=${state},q=${q},archived=${archived})}">
+        ← Previous
+      </a>
+      <span th:text="${'Page '+(results.number + 1)+' of '+results.totalPages}"></span>
+      <a
+        th:if="${results.hasNext()}"
+        th:href="@{${path}(page=${results.number + 1},state=${state},q=${q},archived=${archived})}">
+        Next →
+      </a>
+    </nav>
+  </body>
+</html>

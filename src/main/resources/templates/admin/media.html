@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body class="desk">
+    <header th:replace="~{fragments/desk :: top}"></header>
+    <nav th:replace="~{fragments/desk :: deskNavigation}"></nav>
+    <main id="main" class="wrap desk-main">
+      <div th:replace="~{fragments/site :: alerts}"></div>
+      <div class="page-heading">
+        <h1>
+          Media library
+          <span>.</span>
+        </h1>
+      </div>
+      <form class="panel filter-bar" method="post" th:action="@{/admin/media}" enctype="multipart/form-data">
+        <label>
+          Image
+          <input name="image" type="file" required accept="image/png,image/jpeg" />
+        </label>
+        <label>
+          Alternative text
+          <input name="alt" required maxlength="240" placeholder="Describe the image" />
+        </label>
+        <button class="button">Upload image</button>
+      </form>
+      <div class="card-grid three">
+        <article class="panel asset" th:each="a : ${results.content}">
+          <img th:src="@{/admin/media/{id}/file(id=${a.id})}" th:alt="${a.altText}" loading="lazy" />
+          <small th:text="${a.filename}"></small>
+          <form class="form" method="post" th:action="@{/admin/media/{id}/edit(id=${a.id})}">
+            <label>
+              Alternative text
+              <input name="alt" required maxlength="240" th:value="${a.altText}" />
+            </label>
+            <button class="button secondary small">Save text</button>
+          </form>
+          <form method="post" th:action="@{/admin/media/{id}/delete(id=${a.id})}">
+            <button class="plain danger" data-confirm="Delete this image if it is unused?">Delete image</button>
+          </form>
+        </article>
+      </div>
+      <p th:if="${results.empty}">No images yet.</p>
+      <nav th:replace="~{fragments/desk :: pager('/admin/media')}"></nav>
+    </main>
+  </body>
+</html>

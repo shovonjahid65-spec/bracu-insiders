@@ -1,0 +1,44 @@
+name: bracu-insiders
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: insiders
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD:?Set DB_ADMIN_PASSWORD in .env}
+      INSIDERS_DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    volumes:
+      - newsroom_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U insiders -d insiders"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/insiders
+      DB_USER: insiders
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-editor}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      SEED_EDITION: ${SEED_EDITION:-true}
+      FORWARDED_HEADERS: ${FORWARDED_HEADERS:-none}
+      TRUSTED_PROXY_REGEX: ${TRUSTED_PROXY_REGEX:-127[.]0[.]0[.]1}
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+      interval: 12s
+      timeout: 4s
+      retries: 12
+      start_period: 25s
+volumes:
+  newsroom_data:

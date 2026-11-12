@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body>
+    <header th:replace="~{fragments/site :: header}"></header>
+    <main id="main" class="wrap inner-page login">
+      <section class="panel">
+        <span class="icon-tile"><svg th:replace="~{fragments/site :: icon('lock')}"></svg></span>
+        <div class="page-heading">
+          <h1>
+            Editor sign-in
+            <span>.</span>
+          </h1>
+        </div>
+        <p class="alert error" th:if="${param.error}" role="alert">The username or password was incorrect.</p>
+        <p class="alert success" th:if="${param.signedout}" role="status">You’re signed out.</p>
+        <form class="form" method="post" th:action="@{/admin/login}">
+          <label>
+            Username
+            <input name="username" autocomplete="username" required maxlength="80" />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button class="button">Sign in →</button>
+        </form>
+      </section>
+    </main>
+    <footer th:replace="~{fragments/site :: footer}"></footer>
+  </body>
+</html>

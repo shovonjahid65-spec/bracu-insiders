@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#062b2b" />
+    <meta
+      name="description"
+      th:content="${story != null ? story.caption : 'Independent student media for the BRAC University community. Read campus news, student stories and events.'}" />
+    <title
+      th:text="${page == 'Home' ? site.siteName + ' | Independent student media' : page + ' | ' + site.siteName}">
+      BRACU Insiders
+    </title>
+    <link rel="icon" href="/images/insiders-mark.png" type="image/png" />
+    <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/dm-serif-text.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/css/site.css" />
+    <script src="/js/site.js" defer></script>
+  </head>
+  <body>
+    <svg th:fragment="icon(name)" class="icon" aria-hidden="true" focusable="false">
+      <use th:href="${'/images/icons.svg#' + name}"></use>
+    </svg>
+    <a th:fragment="brand" class="brand" href="/" aria-label="Publication home">
+      <span class="brand-icon"><img src="/images/insiders-mark.png" alt="" width="44" height="44" /></span>
+      <span>
+        <strong th:text="${site.siteName}">BRACU Insiders</strong>
+        <small>Independent student media</small>
+      </span>
+    </a>
+    <th:block th:fragment="primaryLinks">
+      <a
+        href="/"
+        th:classappend="${page == 'Home' ? 'active' : ''}"
+        th:attr="aria-current=${page == 'Home' ? 'page' : null}">
+        Home
+      </a>
+      <a
+        href="/posts"
+        th:classappend="${page == 'Latest Posts' ? 'active' : ''}"
+        th:attr="aria-current=${page == 'Latest Posts' ? 'page' : null}">
+        Latest Posts
+      </a>
+      <a
+        href="/campus-updates"
+        th:classappend="${page == 'Campus Updates' ? 'active' : ''}"
+        th:attr="aria-current=${page == 'Campus Updates' ? 'page' : null}">
+        Campus Updates
+      </a>
+      <a
+        href="/events"
+        th:classappend="${page == 'Events' ? 'active' : ''}"
+        th:attr="aria-current=${page == 'Events' ? 'page' : null}">
+        Events
+      </a>
+      <a
+        href="/student-stories"
+        th:classappend="${page == 'Student Stories' ? 'active' : ''}"
+        th:attr="aria-current=${page == 'Student Stories' ? 'page' : null}">
+        Student Stories
+      </a>
+    </th:block>
+    <header th:fragment="header">
+      <a class="skip" href="#main">Skip to content</a>
+      <div class="utility">
+        <div class="wrap utility-inner">
+          <span class="utility-location">
+            <svg th:replace="~{fragments/site :: icon('location')}"></svg>
+            Dhaka, Bangladesh
+          </span>
+          <span class="utility-date" th:text="${issueDate}"></span>
+          <a class="social-link" th:href="${site.socialLink}" target="_blank" rel="noopener">
+            <svg th:replace="~{fragments/site :: icon('facebook')}"></svg>
+            <span th:text="${site.facebookUrl == null ? 'Find us on Facebook' : 'Follow on Facebook'}"></span>
+            <svg th:replace="~{fragments/site :: icon('external')}"></svg>
+          </a>
+        </div>
+      </div>
+      <div class="masthead">
+        <div class="wrap mast-inner">
+          <a th:replace="~{fragments/site :: brand}"></a>
+          <nav class="desktop-nav" aria-label="Main navigation">
+            <th:block th:replace="~{fragments/site :: primaryLinks}"></th:block>
+          </nav>
+          <div class="nav-actions">
+            <details class="search-drop" data-drop>
+              <summary class="icon-btn" aria-label="Search stories">
+                <svg th:replace="~{fragments/site :: icon('search')}"></svg>
+              </summary>
+              <form class="search-pop" action="/posts" method="get">
+                <label>
+                  Search the newsroom
+                  <input
+                    type="search"
+                    name="q"
+                    placeholder="Stories, topics, campus…"
+                    maxlength="160"
+                    required />
+                </label>
+                <button class="button small" type="submit">Search</button>
+              </form>
+            </details>
+            <a
+              href="/contact"
+              class="button contact-nav"
+              th:attr="aria-current=${page == 'Contact Us' ? 'page' : null}">
+              Contact Us
+              <svg th:replace="~{fragments/site :: icon('external')}"></svg>
+            </a>
+            <details class="mobile-menu" data-drop>
+              <summary class="icon-btn" aria-label="Open navigation">
+                <svg th:replace="~{fragments/site :: icon('menu')}"></svg>
+              </summary>
+              <nav class="menu-panel" aria-label="Mobile navigation">
+                <th:block th:replace="~{fragments/site :: primaryLinks}"></th:block>
+                <a href="/contact">Contact Us</a>
+              </nav>
+            </details>
+          </div>
+        </div>
+      </div>
+    </header>
+    <footer th:fragment="footer" class="footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <a th:replace="~{fragments/site :: brand}"></a>
+            <p th:text="${site.tagline}"></p>
+            <p class="foot-note">
+              An independent, student-run publication for current students, freshers and alumni. Unaffiliated
+              with the university administration.
+            </p>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <a href="/posts">Latest Posts</a>
+            <a href="/campus-updates">Campus Updates</a>
+            <a href="/events">Events</a>
+            <a href="/student-stories">Student Stories</a>
+          </div>
+          <div>
+            <h2>Newsroom</h2>
+            <a href="/contact">Message the team</a>
+            <a href="/replies">Check a reply</a>
+            <a th:href="${'mailto:' + site.email}" th:text="${site.email}"></a>
+            <a th:href="${site.socialLink}" target="_blank" rel="noopener">Facebook ↗</a>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span th:text="${'© ' + year + ' ' + site.siteName}"></span>
+          <span>
+            <a href="/credits">Image credits</a>
+            <a href="/admin">Editor sign-in</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+    <div th:fragment="alerts">
+      <p th:if="${notice}" class="alert success" role="status" th:text="${notice}"></p>
+      <p th:if="${error}" class="alert error" role="alert" th:text="${error}"></p>
+    </div>
+    <article th:fragment="card(story)" class="story-card">
+      <a class="card-photo" th:href="${story.url}" tabindex="-1" aria-hidden="true">
+        <img
+          th:if="${story.cover}"
+          th:src="${story.cover.url}"
+          th:alt="${story.cover.altText}"
+          loading="lazy"
+          width="600"
+          height="360" />
+        <span th:unless="${story.cover}" class="card-placeholder">
+          <svg th:replace="~{fragments/site :: icon('calendar')}"></svg>
+        </span>
+        <span th:if="${story.videoUrl}" class="play-chip">
+          <svg th:replace="~{fragments/site :: icon('play')}"></svg>
+          Video
+        </span>
+      </a>
+      <div class="card-body">
+        <a
+          class="category"
+          th:href="@{/posts(category=${story.category.slug})}"
+          th:text="${story.category.name}"></a>
+        <h3><a th:href="${story.url}" th:text="${story.title}"></a></h3>
+        <p th:text="${story.caption}"></p>
+        <div class="meta">
+          <span th:text="${story.dateLabel}"></span>
+          <i></i>
+          <span th:text="${story.minutes + ' min read'}"></span>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>

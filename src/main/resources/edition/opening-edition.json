@@ -1,0 +1,159 @@
+{
+  "images": [
+    {
+      "key": "rover",
+      "file": "rover-cover.webp",
+      "alt": "Green and gold rover illustration from the BRACU Insiders poster",
+      "credit": "BRACU Insiders · Editorial illustration"
+    },
+    {
+      "key": "poster",
+      "file": "insiders-green-poster.webp",
+      "alt": "BRACU Insiders’ green rover and wordmark",
+      "credit": "BRACU Insiders · New identity"
+    },
+    {
+      "key": "original",
+      "file": "insiders-original.webp",
+      "alt": "The original BRACU Insiders rover poster in yellow and blue",
+      "credit": "BRACU Insiders · Original identity"
+    },
+    {
+      "key": "campus",
+      "file": "campus.webp",
+      "alt": "BRAC University’s Merul Badda campus",
+      "credit": "Lahsim Niasoh · CC BY-SA 4.0"
+    },
+    {
+      "key": "roof",
+      "file": "roof.webp",
+      "alt": "Rooftop playground at the Merul Badda campus",
+      "credit": "Lahsim Niasoh · CC BY-SA 4.0"
+    },
+    {
+      "key": "rs",
+      "file": "rs.webp",
+      "alt": "A view inside BRAC University’s residential campus",
+      "credit": "Towhidul Islam 21 · CC BY-SA 4.0"
+    },
+    {
+      "key": "classroom",
+      "file": "classroom.webp",
+      "alt": "Inside a Merul Badda classroom",
+      "credit": "Lahsim Niasoh · CC BY-SA 4.0"
+    },
+    {
+      "key": "reveal",
+      "file": "reveal.webp",
+      "alt": "A frame from the BRACU Insiders logo reveal",
+      "credit": "BRACU Insiders · Film still"
+    }
+  ],
+  "posts": [
+    {
+      "slug": "inside-bracus-mars-rover-team",
+      "title": "Inside BRACU’s Mars rover team",
+      "caption": "Meet Mongol-Tori, the student engineers behind Polaris and a decade of rover building at BRAC University.",
+      "body": "Polaris is the name to look for on the European Rover Challenge’s 2026 team register. Its builders are BRACU Mongol-Tori, an undergraduate team that traces its work back to 2016.\n\nThe competition lists 65 team members and describes 2026 as their first entry in the European Rover Challenge. The team also competes in the University Rover Challenge. Those are two different competitions, so a placing in one belongs to that event’s record.\n\nThe green-and-gold rover on this page is BRACU Insiders artwork. For the competition entry and team profile, open the source below.",
+      "category": "student-achievements",
+      "source": "https://roverchallenge.eu/team/bracu-mongol-tori-2026/",
+      "featured": true,
+      "published": "2026-11-12T01:50:00Z",
+      "images": [
+        "rover",
+        "poster"
+      ]
+    },
+    {
+      "slug": "merul-badda-between-classes",
+      "title": "A fresher’s guide to Merul Badda",
+      "caption": "The library, rooftop track and places to pause between classes on BRACU’s vertical campus.",
+      "body": "For a first visit, give yourself time to find both your classroom and one place to take a break. The campus entrance is on Pragati Sarani in Merul Badda. Check your section announcement for the room before heading upstairs.\n\nThe Ayesha Abed Library offers study spaces, while the cafeteria is an easy place to meet someone after class. The rooftop has a jogging track and green lawn. Follow posted access hours when planning a visit.\n\nBRAC University’s campus guide has photographs of these spaces. Open it before your first morning and pick one landmark to use as a meeting point.",
+      "category": "campus-news",
+      "source": "https://www.bracu.ac.bd/student-life/brac-university-campus",
+      "published": "2026-11-12T01:45:00Z",
+      "images": [
+        "campus",
+        "roof"
+      ]
+    },
+    {
+      "slug": "before-fall-midterms",
+      "title": "Fall midterms: the dates to keep handy",
+      "caption": "The university’s academic calendar lists 21–29 November for the Fall 2026 midterm examination week.",
+      "body": "Mark Saturday, 21 November through Sunday, 29 November in your calendar. These are the dates of the examination window published by BRAC University.\n\nYour own papers can fall on different days within that window. Check the date, time and room for each section with your course faculty, and keep the department’s latest notice alongside your timetable.",
+      "category": "announcements",
+      "source": "https://www.bracu.ac.bd/academic-dates",
+      "event": "2026-11-21",
+      "end": "2026-11-29",
+      "info": "21–29 November · Academic calendar",
+      "published": "2026-11-12T01:40:00Z",
+      "images": [
+        "classroom"
+      ]
+    },
+    {
+      "slug": "the-insiders-logo-reveal",
+      "title": "Watch the new Insiders logo reveal",
+      "caption": "Our rover has a new home in deep teal, green and gold. Watch the ten-second reveal and compare the two original posters.",
+      "body": "The rover connects both versions of our page identity. In the original poster, a yellow frame surrounds the campus photograph. In the new artwork, the rover sits inside a green frame against a dark geometric background.\n\nThe short film brings the two looks together. You can play it with sound or follow the on-screen titles. Both original designs are in the gallery below.",
+      "category": "entertainment",
+      "video": "/video/insiders-logo-reveal.mp4",
+      "published": "2026-11-12T01:35:00Z",
+      "images": [
+        "reveal",
+        "poster",
+        "original"
+      ]
+    },
+    {
+      "slug": "your-first-campus-club",
+      "title": "Where to start with campus clubs",
+      "caption": "A practical way to narrow down the club list and find the first meeting you actually want to attend.",
+      "body": "Start with a question you would like to spend an afternoon on. If the answer involves a camera, the Art & Photography Society is an obvious place to look. If you enjoy arguing through both sides of an issue, look up the Debating Club.\n\nBRAC University’s directory lists academic and co-curricular groups. Make a shortlist of two, read their current announcements and ask about the next open activity. Confirm recruitment dates with the club before planning around them.",
+      "category": "club-activities",
+      "source": "https://www.bracu.ac.bd/student-life/list-brac-university-clubsocietyforum",
+      "published": "2026-11-12T01:30:00Z",
+      "images": [
+        "roof"
+      ]
+    },
+    {
+      "slug": "savar-before-you-pack",
+      "title": "Going to Savar? Start with these questions",
+      "caption": "A student checklist for the move from a city timetable to a residential semester.",
+      "body": "Before leaving for Savar, find the handbook and arrival instructions for your own cohort. Write down the reporting time, contact point and items the campus asks you to bring. Save an offline copy so you can find it during the journey.\n\nThe residential semester puts classes and shared living in the same place. Think through daily details with your roommate, including alarms, study time and how you will keep the room tidy. The university’s Residential Semester page is a good starting point for programme information.",
+      "category": "opinions",
+      "source": "https://www.bracu.ac.bd/student-life/residential-semester",
+      "published": "2026-11-12T01:25:00Z",
+      "images": [
+        "rs"
+      ]
+    },
+    {
+      "slug": "solar-power-and-farmland",
+      "title": "Can farmland grow crops and generate power?",
+      "caption": "BIGD’s December research event brings early findings from BRAC University’s agrivoltaics pilot into the discussion.",
+      "body": "Researchers will discuss using a single plot of land for both crops and solar electricity. The pilot in Ghior, Manikganj, brings together BIGD, BRAC University’s EEE department and project partners.\n\nBIGD lists the session for 2 December, from 10:00 am to 1:30 pm. Check the organizer’s page for participation details before making travel plans.",
+      "category": "events",
+      "source": "https://bigd.bracu.ac.bd/event/dissemination-event-agrivoltaics-কৃষি-সৌরবিদ্যুৎ-a-solution-of-our-times/",
+      "event": "2026-12-02",
+      "info": "10:00 AM · BIGD research event",
+      "published": "2026-11-12T01:20:00Z",
+      "images": []
+    },
+    {
+      "slug": "women-and-political-power",
+      "title": "Women and political power",
+      "caption": "A two-day BIGD conference on women’s political participation and leadership in Bangladesh and across South Asia.",
+      "body": "The Unfinished Revolution brings researchers, public institutions and civil-society participants together to discuss political change and women’s leadership.\n\nThe organizer lists a hybrid programme beginning at 9:00 am on 9 December and closing at 5:00 pm on 10 December. Use BIGD’s event page for attendance details and the current programme.",
+      "category": "events",
+      "source": "https://bigd.bracu.ac.bd/event/regional-conference-the-unfinished-revolution-women-and-political-power/",
+      "event": "2026-12-09",
+      "end": "2026-12-10",
+      "info": "9:00 AM · Hybrid conference",
+      "published": "2026-11-12T01:15:00Z",
+      "images": []
+    }
+  ]
+}

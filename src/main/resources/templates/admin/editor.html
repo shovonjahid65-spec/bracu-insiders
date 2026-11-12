@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body class="desk">
+    <header th:replace="~{fragments/desk :: top}"></header>
+    <nav th:replace="~{fragments/desk :: deskNavigation}"></nav>
+    <main id="main" class="wrap desk-main">
+      <div th:replace="~{fragments/site :: alerts}"></div>
+      <a class="back" href="/admin/posts">← Manage posts</a>
+      <div class="page-heading"><h1 th:text="${page}"></h1></div>
+      <form
+        class="form editor-form"
+        method="post"
+        enctype="multipart/form-data"
+        th:action="${postId==null ? '/admin/posts/new' : '/admin/posts/'+postId+'/edit'}">
+        <input type="hidden" name="version" th:value="${form.version}" />
+        <div class="editor-grid">
+          <section class="panel form">
+            <h2>Story</h2>
+            <label>
+              Title
+              <input required name="title" maxlength="160" th:value="${form.title}" />
+            </label>
+            <label>
+              Caption
+              <textarea required name="caption" rows="3" maxlength="600" th:text="${form.caption}"></textarea>
+            </label>
+            <label>
+              Article text
+              <span class="optional">(optional)</span>
+              <textarea name="body" rows="11" maxlength="30000" th:text="${form.body}"></textarea>
+              <small>Leave a blank line between paragraphs.</small>
+            </label>
+            <label>
+              Original source link
+              <input
+                type="url"
+                name="sourceUrl"
+                placeholder="https://"
+                maxlength="1200"
+                th:value="${form.sourceUrl}" />
+            </label>
+            <label>
+              Video link
+              <input name="videoUrl" maxlength="1200" th:value="${form.videoUrl}" />
+              <small>YouTube and Vimeo embed on the story. Other HTTPS links open the original video.</small>
+            </label>
+            <h2>Images</h2>
+            <label>
+              Upload JPEG or PNG files
+              <input type="file" name="uploads" multiple accept="image/png,image/jpeg" />
+              <small>Up to six images per post, 4 MB per image.</small>
+            </label>
+            <details class="library-picker">
+              <summary>Select images from the media library</summary>
+              <div class="picker-grid">
+                <label class="pick" th:each="image : ${assets}">
+                  <input
+                    type="checkbox"
+                    name="selectedMedia"
+                    th:value="${image.id}"
+                    th:checked="${form.selectedMedia.contains(image.id)}" />
+                  <img th:src="@{/admin/media/{id}/file(id=${image.id})}" alt="" loading="lazy" />
+                  <span th:text="${image.altText}"></span>
+                </label>
+              </div>
+            </details>
+            <label>
+              Cover image
+              <select name="coverId">
+                <option value="">First selected or uploaded image</option>
+                <option
+                  th:each="image : ${assets}"
+                  th:value="${image.id}"
+                  th:selected="${form.coverId==image.id}"
+                  th:text="${image.altText}"></option>
+              </select>
+              <small>Choosing a cover also adds it to the gallery.</small>
+            </label>
+          </section>
+          <aside>
+            <section class="panel form">
+              <h2>Publication</h2>
+              <label>
+                Category
+                <select required name="categoryId">
+                  <option value="">Choose a category</option>
+                  <option
+                    th:each="c : ${categories}"
+                    th:value="${c.id}"
+                    th:selected="${form.categoryId==c.id}"
+                    th:text="${c.name}"></option>
+                </select>
+              </label>
+              <label>
+                Publication date and time
+                <input name="publishedAt" type="datetime-local" th:value="${@dates.input(form.publishedAt)}" />
+                <small>Dhaka time. Leave blank to use the publication time.</small>
+              </label>
+              <label class="checkline">
+                <input type="checkbox" name="featured" value="true" th:checked="${form.featured}" />
+                Pin as a featured story
+              </label>
+              <div class="actions">
+                <button name="intent" value="publish" class="button">Publish</button>
+                <button name="intent" value="draft" class="button secondary">Save draft</button>
+              </div>
+            </section>
+            <section class="panel form">
+              <h2>Event details</h2>
+              <label>
+                First day
+                <input type="date" name="eventDate" th:value="${form.eventDate}" />
+              </label>
+              <label>
+                Last day
+                <span class="optional">(optional)</span>
+                <input type="date" name="eventEnd" th:value="${form.eventEnd}" />
+              </label>
+              <label>
+                Time or location
+                <input
+                  name="eventInfo"
+                  maxlength="150"
+                  th:value="${form.eventInfo}"
+                  placeholder="10:00 AM · Auditorium" />
+              </label>
+              <small>A dated post appears in the campus calendar.</small>
+            </section>
+          </aside>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

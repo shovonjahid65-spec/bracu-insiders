@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body class="desk">
+    <header th:replace="~{fragments/desk :: top}"></header>
+    <nav th:replace="~{fragments/desk :: deskNavigation}"></nav>
+    <main id="main" class="wrap desk-main">
+      <div th:replace="~{fragments/site :: alerts}"></div>
+      <a class="back" href="/admin/messages">← Messages</a>
+      <div class="page-heading"><h1 th:text="${thread.letter.subject}"></h1></div>
+      <div class="contact-layout">
+        <section class="panel">
+          <small class="category">Private message</small>
+          <h2 th:text="${thread.letter.senderName}"></h2>
+          <p th:if="${thread.letter.email}" th:text="${thread.letter.email}"></p>
+          <small th:text="${@dates.stamp(thread.letter.createdAt)}"></small>
+          <p class="preserve" th:text="${thread.letter.body}"></p>
+          <a
+            class="text-link"
+            th:if="${thread.filename}"
+            th:href="@{/admin/messages/{id}/attachment(id=${thread.letter.id})}"
+            th:text="${'Download · '+thread.filename}"></a>
+          <div th:each="r : ${thread.replies}" class="reply">
+            <small th:text="${r.author+' · '+@dates.stamp(r.sentAt)}"></small>
+            <p class="preserve" th:text="${r.body}"></p>
+          </div>
+          <form
+            class="form separated"
+            method="post"
+            th:action="@{/admin/messages/{id}/reply(id=${thread.letter.id})}">
+            <label>
+              Reply to sender
+              <textarea name="body" rows="4" required maxlength="6000"></textarea>
+              <small>The sender can read your reply using their receipt code.</small>
+            </label>
+            <button class="button">Send private reply</button>
+          </form>
+        </section>
+        <aside>
+          <section class="panel">
+            <h2>Message actions</h2>
+            <form class="form" method="post" th:action="@{/admin/messages/{id}/action(id=${thread.letter.id})}">
+              <button
+                class="button secondary"
+                name="action"
+                th:value="${thread.letter.archived ? 'restore' : 'archive'}"
+                th:text="${thread.letter.archived ? 'Restore to inbox' : 'Archive message'}"></button>
+              <button
+                class="plain danger"
+                name="action"
+                value="delete"
+                data-confirm="Delete this message, its attachment and all replies?">
+                Delete permanently
+              </button>
+            </form>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

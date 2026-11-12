@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body class="desk">
+    <header th:replace="~{fragments/desk :: top}"></header>
+    <nav th:replace="~{fragments/desk :: deskNavigation}"></nav>
+    <main id="main" class="wrap desk-main">
+      <div th:replace="~{fragments/site :: alerts}"></div>
+      <div class="page-heading">
+        <h1>
+          Website settings
+          <span>.</span>
+        </h1>
+      </div>
+      <form method="post" th:action="@{/admin/settings}" class="panel form narrow-left">
+        <input type="hidden" name="version" th:value="${site.version}" />
+        <label>
+          Publication name
+          <input name="name" th:value="${site.siteName}" required maxlength="70" />
+        </label>
+        <label>
+          Tagline
+          <input name="tagline" th:value="${site.tagline}" required maxlength="140" />
+        </label>
+        <label>
+          Contact email
+          <input type="email" name="email" th:value="${site.email}" required maxlength="254" />
+        </label>
+        <label>
+          Facebook page URL
+          <input type="url" name="facebook" th:value="${site.facebookUrl}" maxlength="600" />
+        </label>
+        <button class="button">Save settings</button>
+      </form>
+    </main>
+  </body>
+</html>

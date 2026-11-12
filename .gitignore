@@ -1,0 +1,9 @@
+target/
+.env
+.env.*
+!.env.example
+release/*.jar
+*.dump
+*.log
+.idea/
+.vscode/

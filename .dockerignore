@@ -1,0 +1,9 @@
+.git
+.env
+.env.*
+target
+release
+qa
+docs
+*.log
+*.dump

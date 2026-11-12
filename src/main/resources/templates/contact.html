@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body>
+    <header th:replace="~{fragments/site :: header}"></header>
+    <main id="main" class="wrap inner-page">
+      <a class="back" href="/">Home</a>
+      <div class="page-heading">
+        <h1>
+          Contact the newsroom
+          <span>.</span>
+        </h1>
+        <p>Share a campus update, pitch a student story or send the team a correction.</p>
+      </div>
+      <div class="contact-layout">
+        <div>
+          <section th:if="${receipt}" class="panel receipt" role="status">
+            <span class="icon-tile"><svg th:replace="~{fragments/site :: icon('check')}"></svg></span>
+            <h2>Message received</h2>
+            <p>Save your private receipt code. Enter it on the replies page to read the team’s response.</p>
+            <code id="receipt-code" th:text="${receipt}"></code>
+            <div class="actions">
+              <button class="button secondary js-only" type="button" data-copy-receipt>Copy code</button>
+              <a class="button" href="/replies">Check a reply →</a>
+            </div>
+            <span data-copy-status role="status"></span>
+          </section>
+          <form
+            th:unless="${receipt}"
+            class="panel form"
+            th:action="@{/contact}"
+            method="post"
+            enctype="multipart/form-data">
+            <h2>Send a message</h2>
+            <div th:replace="~{fragments/site :: alerts}"></div>
+            <div class="fields two">
+              <label>
+                Your name
+                <input name="name" autocomplete="name" maxlength="80" required th:value="${name}" />
+              </label>
+              <label>
+                Email
+                <span class="optional">(optional)</span>
+                <input type="email" autocomplete="email" name="email" maxlength="254" th:value="${email}" />
+              </label>
+            </div>
+            <label>
+              Subject
+              <input name="subject" maxlength="140" required th:value="${subject}" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" maxlength="6000" rows="6" required th:text="${message}"></textarea>
+            </label>
+            <label>
+              Attachment
+              <span class="optional">(optional)</span>
+              <input type="file" name="attachment" accept="image/jpeg,image/png,application/pdf" />
+              <small>JPG, PNG or PDF · up to 4 MB</small>
+            </label>
+            <label class="honeypot" aria-hidden="true">
+              Website
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+            <p class="form-hint">
+              <svg th:replace="~{fragments/site :: icon('lock')}"></svg>
+              Only the editorial team can read your message. You’ll receive a private code for checking replies.
+            </p>
+            <button class="button" type="submit">
+              Send message
+              <svg th:replace="~{fragments/site :: icon('send')}"></svg>
+            </button>
+          </form>
+        </div>
+        <aside class="rail-box contact-aside">
+          <div class="rail-title"><h2>Reach the team</h2></div>
+          <small>Email</small>
+          <a th:href="${'mailto:' + site.email}" th:text="${site.email}"></a>
+          <small>Social</small>
+          <a
+            th:href="${site.socialLink}"
+            target="_blank"
+            rel="noopener"
+            th:text="${site.siteName + ' on Facebook ↗'}">
+            BRACU Insiders on Facebook ↗
+          </a>
+          <small>Already sent a message?</small>
+          <a href="/replies">Check a private reply →</a>
+        </aside>
+      </div>
+    </main>
+    <footer th:replace="~{fragments/site :: footer}"></footer>
+  </body>
+</html>

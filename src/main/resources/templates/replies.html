@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body>
+    <header th:replace="~{fragments/site :: header}"></header>
+    <main id="main" class="wrap inner-page narrow">
+      <a class="back" href="/contact">← Contact the newsroom</a>
+      <div class="page-heading">
+        <h1>
+          Check a reply
+          <span>.</span>
+        </h1>
+        <p>Use the private receipt code you saved after sending your message.</p>
+      </div>
+      <form class="panel form" method="post" th:action="@{/replies}">
+        <div th:replace="~{fragments/site :: alerts}"></div>
+        <label>
+          Receipt code
+          <input name="code" required minlength="32" maxlength="32" autocomplete="off" spellcheck="false" />
+        </label>
+        <button class="button">Check replies →</button>
+      </form>
+      <section th:if="${matched}" class="panel">
+        <h2>Newsroom replies</h2>
+        <p th:if="${replies.empty}">The team hasn’t replied yet. Keep your code and check back later.</p>
+        <div th:each="r : ${replies}" class="reply">
+          <small th:text="${@dates.stamp(r.sentAt)}"></small>
+          <p class="preserve" th:text="${r.body}"></p>
+        </div>
+      </section>
+    </main>
+    <footer th:replace="~{fragments/site :: footer}"></footer>
+  </body>
+</html>

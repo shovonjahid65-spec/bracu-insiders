@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Newsroom notice · BRACU Insiders</title>
+    <link rel="stylesheet" href="/css/site.css" />
+  </head>
+  <body>
+    <main class="wrap inner-page narrow">
+      <a class="back" href="/">← BRACU Insiders</a>
+      <section class="panel state">
+        <span class="category" th:text="${'Request ' + status}"></span>
+        <h1
+          th:text="${heading ?: (status == 404 ? 'Page unavailable' : (status == 403 ? 'This request could not be accepted' : (status == 429 ? 'Please wait a moment' : 'We couldn’t finish that request')))}"></h1>
+        <p
+          th:text="${detail ?: (status == 404 ? 'This page may have moved or the story is no longer published.' : (status == 429 ? 'Please try again in 15 minutes.' : 'Reopen the page and try again.'))}"></p>
+        <a class="button" href="/">Return home →</a>
+      </section>
+    </main>
+  </body>
+</html>

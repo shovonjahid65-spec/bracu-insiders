@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body class="desk">
+    <header th:replace="~{fragments/desk :: top}"></header>
+    <nav th:replace="~{fragments/desk :: deskNavigation}"></nav>
+    <main id="main" class="wrap desk-main">
+      <div th:replace="~{fragments/site :: alerts}"></div>
+      <div class="page-heading">
+        <h1>
+          Categories
+          <span>.</span>
+        </h1>
+      </div>
+      <section class="panel">
+        <h2>Add a category</h2>
+        <form class="category-form" method="post" th:action="@{/admin/categories}">
+          <label>
+            Name
+            <input name="name" required maxlength="70" />
+          </label>
+          <label>
+            Section
+            <select name="section">
+              <option th:each="s : ${sections}" th:value="${s.name()}" th:text="${s.label}"></option>
+            </select>
+          </label>
+          <label class="checkline">
+            <input type="checkbox" name="notice" value="true" />
+            Campus wire
+          </label>
+          <button class="button small">Add</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>Manage categories</h2>
+        <div class="category-row" th:each="c : ${items}">
+          <form class="category-form" method="post" th:action="@{/admin/categories}">
+            <input type="hidden" name="id" th:value="${c.id}" />
+            <label>
+              Name
+              <input name="name" th:value="${c.name}" required maxlength="70" />
+            </label>
+            <label>
+              Section
+              <select name="section">
+                <option
+                  th:each="s : ${sections}"
+                  th:value="${s.name()}"
+                  th:selected="${s==c.section}"
+                  th:text="${s.label}"></option>
+              </select>
+            </label>
+            <label class="checkline">
+              <input type="checkbox" name="notice" value="true" th:checked="${c.notice}" />
+              Campus wire
+            </label>
+            <button class="button secondary small">Save</button>
+          </form>
+          <form method="post" th:action="@{/admin/categories/{id}/delete(id=${c.id})}">
+            <button class="plain danger" data-confirm="Delete this unused category?">Delete</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

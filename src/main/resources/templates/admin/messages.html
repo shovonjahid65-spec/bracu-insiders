@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body class="desk">
+    <header th:replace="~{fragments/desk :: top}"></header>
+    <nav th:replace="~{fragments/desk :: deskNavigation}"></nav>
+    <main id="main" class="wrap desk-main">
+      <div th:replace="~{fragments/site :: alerts}"></div>
+      <div class="section-head">
+        <h1>
+          Messages
+          <span>.</span>
+        </h1>
+      </div>
+      <nav class="tabs">
+        <a href="/admin/messages" th:classappend="${!archived ? 'selected' : ''}">Inbox</a>
+        <a href="/admin/messages?archived=true" th:classappend="${archived ? 'selected' : ''}">Archived</a>
+      </nav>
+      <section class="panel">
+        <p th:if="${results.empty}">No messages in this folder.</p>
+        <a class="manage-row" th:each="m : ${results.content}" th:href="@{/admin/messages/{id}(id=${m.id})}">
+          <span>
+            <small th:text="${m.senderName}"></small>
+            <strong th:text="${m.subject}"></strong>
+            <small th:text="${@dates.stamp(m.createdAt)}"></small>
+          </span>
+          <b th:unless="${m.read}" class="badge">Unread</b>
+        </a>
+      </section>
+      <nav th:replace="~{fragments/desk :: pager('/admin/messages')}"></nav>
+    </main>
+  </body>
+</html>

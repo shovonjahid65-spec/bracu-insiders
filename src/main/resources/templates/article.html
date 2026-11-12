@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/site :: head}"></head>
+  <body>
+    <header th:replace="~{fragments/site :: header}"></header>
+    <main id="main" class="wrap inner-page">
+      <article class="article">
+        <a class="back" href="/posts">← Latest posts</a>
+        <div class="article-heading">
+          <a
+            class="category"
+            th:href="@{/posts(category=${story.category.slug})}"
+            th:text="${story.category.name}"></a>
+          <h1 th:text="${story.title}"></h1>
+          <p class="deck" th:text="${story.caption}"></p>
+          <div class="article-byline">
+            <img src="/images/insiders-mark.png" alt="" width="32" height="32" />
+            <b th:text="${site.siteName}"></b>
+            <span>·</span>
+            <time th:text="${story.dateLabel}"></time>
+            <span>·</span>
+            <span th:text="${story.minutes+' min read'}"></span>
+          </div>
+        </div>
+        <div class="article-layout">
+          <div class="article-main">
+            <div th:if="${story.eventDate}" class="event-panel">
+              <svg th:replace="~{fragments/site :: icon('calendar')}"></svg>
+              <div>
+                <strong th:text="${#temporals.format(story.eventDate,'d MMMM yyyy')}"></strong>
+                <strong
+                  th:if="${story.eventEnd != null and story.eventEnd != story.eventDate}"
+                  th:text="${' – ' + #temporals.format(story.eventEnd,'d MMMM yyyy')}"></strong>
+                <small th:text="${story.eventInfo}"></small>
+              </div>
+            </div>
+            <figure th:if="${story.localVideo}" class="video-figure">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="/images/reveal.webp"
+                th:src="${story.videoUrl}">
+                <track kind="captions" src="/video/reveal-en.vtt" srclang="en" label="English" />
+              </video>
+              <figcaption>BRACU Insiders · Logo reveal</figcaption>
+            </figure>
+            <iframe
+              th:if="${story.embed}"
+              class="embed"
+              th:src="${story.embed}"
+              th:title="${story.title}"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <a
+              class="button"
+              th:if="${story.videoUrl != null and !story.localVideo and story.embed == null}"
+              th:href="${story.videoUrl}"
+              target="_blank"
+              rel="noopener">
+              Watch video ↗
+            </a>
+            <figure th:if="${story.cover != null and !story.localVideo}">
+              <img class="article-cover" th:src="${story.cover.url}" th:alt="${story.cover.altText}" />
+              <figcaption th:if="${story.cover.credit}" th:text="${story.cover.credit}"></figcaption>
+            </figure>
+            <div class="prose"><p th:each="para : ${story.paragraphs}" th:text="${para}"></p></div>
+            <div class="gallery" th:if="${story.images.size() > 1}">
+              <figure th:each="picture, stat : ${story.images}" th:if="${!stat.first}">
+                <a th:href="${picture.url}" target="_blank" rel="noopener">
+                  <img th:src="${picture.url}" th:alt="${picture.altText}" loading="lazy" />
+                </a>
+                <figcaption th:text="${picture.credit ?: picture.altText}"></figcaption>
+              </figure>
+            </div>
+            <div class="article-tools">
+              <a
+                th:if="${story.sourceUrl}"
+                class="button secondary"
+                th:href="${story.sourceUrl}"
+                target="_blank"
+                rel="noopener">
+                Read original source ↗
+              </a>
+              <button type="button" class="button secondary js-only" data-copy-url>Copy story link</button>
+              <span data-copy-status role="status"></span>
+            </div>
+          </div>
+          <aside>
+            <div class="rail-box">
+              <div class="rail-title"><h2>More to read</h2></div>
+              <a th:each="item : ${more}" class="more-row" th:href="${item.url}">
+                <small class="category" th:text="${item.category.name}"></small>
+                <strong th:text="${item.title}"></strong>
+              </a>
+              <a class="rail-link" href="/posts">All posts →</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </main>
+    <footer th:replace="~{fragments/site :: footer}"></footer>
+  </body>
+</html>
